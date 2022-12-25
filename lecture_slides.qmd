@@ -67,7 +67,7 @@ How to make static and interactive charts using R that look like this.
 
 ### Static Chart
 
-```{r echo=FALSE, fig.align='center',fig.dim=c(10,6)}
+```{r echo=FALSE, fig.align='center',fig.dim=c(14,7)}
 ggplot2::mpg|>
   ggplot2::ggplot()+
   ggplot2::geom_jitter(ggplot2::aes(hwy,cty,colour = class),
@@ -118,4 +118,16 @@ ggiraph::girafe(ggobj = p1,width_svg = 8,height_svg = 4)
 
 :::
 
-## 
+## Load these libraries
+
+
+<br>
+
+
+```{r eval=FALSE,echo=TRUE}
+library(tidyverse)
+library(scales)
+library(gapminder)
+library(ggiraph)
+```
+
