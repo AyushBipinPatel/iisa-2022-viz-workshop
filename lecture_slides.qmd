@@ -131,3 +131,25 @@ library(gapminder)
 library(ggiraph)
 ```
 
+## The datasets {.scrollable}
+
+:::{.panel-tabset}
+
+### Gapminder
+
+```{r about_gapminder, echo=FALSE}
+gapminder::gapminder|>
+  gt::gt()
+  
+```
+
+
+### msleep
+
+```{r about_msleep, echo=FALSE}
+ggplot2::msleep|>
+  gt::gt()
+  
+```
+
+:::
