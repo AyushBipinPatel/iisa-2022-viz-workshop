@@ -1,0 +1,119 @@
+---
+title: "Data Visualization with R"
+author: "Ayush Patel"
+format: 
+  revealjs:
+    standalone: true
+    slide-number: c/t
+    width: 1400
+    theme: [serif, theme.scss]
+---
+
+## Before we start
+
+::::{.columns}
+
+:::{.column width="70%"}
+
+__Ensure that you have the system requirements mentioned on [this page](https://r-iisa2022.rbind.io/schedule/) under the 'Prepare for the workshop' section.__
+
+:::
+
+:::{.column width="30%"}
+
+```{=html}
+<figure>
+<img src="https://images.metmuseum.org/CRDImages/aa/original/DT5334.jpg" alt="Warrior's armor(gusoku)" >
+<figcaption style="font-size:10px;">Source: <a herf = "https://www.metmuseum.org/art/collection/search/24975?searchField=All&amp;sortBy=Relevance&amp;high=on&amp;ao=on&amp;showOnly=openAccess&amp;ft=start&amp;offset=0&amp;rpp=40&amp;pos=7">Armor (Gusoku)</a></figcaption>
+</figure>
+```
+
+:::
+
+::::
+
+## Hello
+
+::::{.columns}
+
+:::{.column width="70%"}
+I am [Ayush]{.fragment fragment-index="1" style="font-size:45px"}.
+
+
+[Independent researcher working at the intersection of data, law, development and economics.]{.fragment fragment-index="2" style="font-size:25px"} 
+
+[I am a [RStudio (Posit) certified tidyverse Instructor.](https://education.rstudio.com/trainers/people/patel+ayush/)]{.fragment fragment-index="3" style="font-size:25px"} 
+
+[Researcher at [Oxford Poverty and Human development Initiative (OPHI)](https://ophi.org.uk/), at the University of Oxford.]{.fragment fragment-index="4" style="font-size:25px"} 
+:::
+
+:::{.column width="30%"}
+
+__Reach me__
+
+{{< fa solid envelope >}} [ayush.ap58@gmail.com]{style="font-size:25px"}
+
+{{< fa brands twitter >}} [@ayushbipinpatel](https://twitter.com/ayushbipinpatel){style="font-size:25px}
+
+:::
+
+::::
+
+## What will you learn? {.scrollable}
+
+How to make static and interactive charts using R that look like this.
+
+:::{.panel-tabset}
+
+### Static Chart
+
+```{r echo=FALSE, fig.align='center',fig.dim=c(10,6)}
+ggplot2::mpg|>
+  ggplot2::ggplot()+
+  ggplot2::geom_jitter(ggplot2::aes(hwy,cty,colour = class),
+                       size = 2.5,alpha = 0.8)+
+  ggplot2::labs(
+    title = "Difference between performance on Highway and in City",
+    x = "Miles per gallon on highway",
+    y = "Miles per gallon in city",
+    caption = "mpg data from package ggplot2"
+  )+
+  ggplot2::scale_colour_manual(values = c("#181f86","#fad510","#972d14",
+                                                   "#e09500","#5bbcd6",
+                                                   "#00a08a","#046c9a"),
+                               name = "Class")+
+  ggplot2::theme_minimal() -> p
+
+p
+```
+
+
+### Interactive Chart
+
+```{r echo=FALSE, fig.align='center',fig.dim=c(10,6)}
+
+ggplot2::mpg|>
+  ggplot2::ggplot()+
+  ggiraph::geom_jitter_interactive(ggplot2::aes(hwy,cty,colour = class,
+                                                tooltip = paste(manufacturer,":", 
+                                                                model,"\n",
+                                                                "cylinder: ", cyl)),
+                       size = 2.5,alpha = 0.8)+
+  ggplot2::labs(
+    title = "Difference between performance on Highway and in City",
+    x = "Miles per gallon on highway",
+    y = "Miles per gallon in city",
+    caption = "mpg data from package ggplot2"
+  )+
+  ggplot2::scale_colour_manual(values = c("#181f86","#fad510","#972d14",
+                                                   "#e09500","#5bbcd6",
+                                                   "#00a08a","#046c9a"),
+                               name = "Class")+
+  ggplot2::theme_minimal() -> p1
+
+ggiraph::girafe(ggobj = p1,width_svg = 8,height_svg = 4)
+
+```
+
+
+:::
