@@ -1,0 +1,94 @@
+---
+title: "Data Visualization Workshop"
+author: "Ayush Patel"
+format: 
+  html: 
+    page-layout: full
+---
+
+# Who might find this workshop useful?
+
+This course will be most useful to those who are beginners in the R programming language and have some experience with the tidyverse. I try to cover the essential ideas and foundations of the {ggplot2} package. In addition to that there are demonstrations to create interactive visualizations using {ggiraph} package and to compose plots using {patchwork} package. 
+
+# Why learn data visualization ?
+
+It is rarely possible to communicate the insights one might have from data without visualizing it. A good visualization will present the information in an accurate, pleasing and memorable manner. It is my hope that through this workshop participants will be exposed to the instruments that are available to create good visualizations using R.
+
+# Outline of topics 
+
+  - A refresher on data wrangling using {dplyr}
+  - The idea of grammar of graphics
+  - Introduction to various charts (geometries)
+  - Adding nuance using aesthetics
+  - Multi-layered plots (more than one geometry)
+  - Controlling appearances and aesthetics
+  - Saving plots
+  - And then a little more (composing plots and interactivity)
+
+Please note the flow of the workshop/lecture will not necessarily follow the sequence mentioned in the outline. 
+
+# Pre-requisite knowledge 
+
+It is my estimate that familiarity with the following topics/concepts will be necessary to get the most out of this workshop. If you know exactly how the following code would work, hop in you are all set.
+
+Assigning values to create object(s)
+
+```{r eval=FALSE, echo=TRUE}
+a <- 52
+
+b <- "hello"
+```
+
+Different types of objects
+
+```{r eval=FALSE, echo=TRUE}
+
+vec_num <- c(1,2,3,5,12,4,2)
+
+vec_char <- c("I", "like", "ggplot")
+
+ls_data <- list(vec_num, vec_char)
+
+df_data <- data.frame(a= c(1,2,3), b = c("l","m","n"))
+
+```
+
+
+Calling a function and storing the output in an object
+
+```{r eval=FALSE,echo=TRUE}
+mean(c(1,2,3,54)) -> avg
+```
+
+Some basic data wrangling
+
+```{r echo=TRUE, eval=FALSE}
+
+penguins %>% 
+  dplyr::group_by(species) %>% 
+  dplyr::summarise(
+    median_body_mass = median(body_mass_g, na.rm = T)
+  )
+
+```
+
+In case you know some of the functions or how some of the code will work but are not entirely sure – worry not. There will be a small refresher during the workshop. However, I recommend brushing up from the [chapter 5 of R for Data Science](https://r4ds.had.co.nz/transform.html). This is sufficient pre-requisite to join this workshop.
+
+# System Requirement
+
+If you have not already done so.
+
+  1. Install the latest version of R on your computer. The current version is 4.2.2 on CRAN.
+  2. Install the latest version of RStudio Desktop
+  3. Make sure you install the following packages in R: tidyverse, ggiraph, gapminder, benchmarkme. This can be easily done in an R session via:
+
+```{r eval=FALSE, echo=TRUE}
+install.packages(c("tidyverse", "ggiraph", "gapminder", "benchmarkme"))
+```
+
+# Refrences
+
+  1. [R for Data Science](https://r4ds.had.co.nz/)
+  2. [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/)
+  3. [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
+  4. [R Graphics Cookbook](https://r-graphics.org/)
