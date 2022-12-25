@@ -70,12 +70,12 @@ How to make static and interactive charts using R that look like this.
 ```{r echo=FALSE, fig.align='center',fig.dim=c(14,7)}
 ggplot2::mpg|>
   ggplot2::ggplot()+
-  ggplot2::geom_jitter(ggplot2::aes(hwy,cty,colour = class),
+  ggplot2::geom_jitter(ggplot2::aes(hwy,displ,colour = class),
                        size = 2.5,alpha = 0.8)+
   ggplot2::labs(
-    title = "Difference between performance on Highway and in City",
+    title = "Relation between power and milage",
     x = "Miles per gallon on highway",
-    y = "Miles per gallon in city",
+    y = "Engine Displacement (Litres)",
     caption = "mpg data from package ggplot2"
   )+
   ggplot2::scale_colour_manual(values = c("#181f86","#fad510","#972d14",
@@ -94,15 +94,15 @@ p
 
 ggplot2::mpg|>
   ggplot2::ggplot()+
-  ggiraph::geom_jitter_interactive(ggplot2::aes(hwy,cty,colour = class,
+  ggiraph::geom_jitter_interactive(ggplot2::aes(hwy,displ,colour = class,
                                                 tooltip = paste(manufacturer,":", 
                                                                 model,"\n",
                                                                 "cylinder: ", cyl)),
                        size = 2.5,alpha = 0.8)+
   ggplot2::labs(
-    title = "Difference between performance on Highway and in City",
+    title = "Relation between power and milage",
     x = "Miles per gallon on highway",
-    y = "Miles per gallon in city",
+    y = "Engine Displacement (Litres)",
     caption = "mpg data from package ggplot2"
   )+
   ggplot2::scale_colour_manual(values = c("#181f86","#fad510","#972d14",
