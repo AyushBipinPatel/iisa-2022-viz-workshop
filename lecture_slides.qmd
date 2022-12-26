@@ -349,3 +349,254 @@ ggplot(data = msleep,
 
 ```
 
+## Exploring Geometries 
+
+. . .
+
+<br>
+There are several geometries to choose from.
+<br>
+<br>
+
+. . .
+
+Which geometry is appropriate for a given plot?
+<br>
+<br>
+
+. . .
+
+We will discuss a few essential geometries and their use cases
+
+## Situation - One Discrete variable {.scrollable}
+
+[Plot frequencies of conservation status of animals in `msleep` data.]{style="font-size:20px"}
+
+:::{.panel-tabset}
+
+### Data
+
+```{r}
+#| echo: false
+
+msleep|>
+  relocate(conservation,everything())|>
+  knitr::kable()|>
+  kableExtra::kable_styling()|>
+  kableExtra::scroll_box(width = "95%", height = "400px")
+  
+```
+
+### Use case - `geom_bar()`
+
+```{r}
+#| code-line-numbers: "3|5"
+#| echo: true
+#| fig-align: center
+#| output-location: column-fragment
+#| fig-width: 8
+#| fig-height: 6
+
+ggplot(
+  data = msleep,
+  aes(x = conservation)
+)+
+  geom_bar()+
+  theme_bw()
+
+```
+
+
+:::
+
+## Situation - One Continious variable {.scrollable}
+
+[Plot sleep time of animals in `msleep` data.]{style="font-size:20px"}
+
+:::{.panel-tabset}
+
+### Data
+
+```{r}
+#| echo: false
+
+msleep|>
+  relocate(bodywt,everything())|>
+  knitr::kable()|>
+  kableExtra::kable_styling()|>
+  kableExtra::scroll_box(width = "95%", height = "400px")
+  
+```
+
+
+
+### Use case - `geom_density()`
+
+```{r}
+#| code-line-numbers: "3|5"
+#| echo: true
+#| fig-align: center
+#| output-location: column-fragment
+#| fig-width: 8
+#| fig-height: 6
+
+ggplot(
+  data = msleep,
+  aes(x = sleep_total)
+)+
+  geom_density()+
+  theme_bw()
+
+```
+
+### Use case - `geom_histogram()`
+
+```{r}
+#| code-line-numbers: "3|5"
+#| echo: true
+#| fig-align: center
+#| output-location: column-fragment
+#| fig-width: 8
+#| fig-height: 6
+
+ggplot(
+  data = msleep,
+  aes(x = sleep_total)
+)+
+  geom_histogram()+
+  theme_bw()
+
+```
+
+:::
+
+## Situation - Two Continious variable {.scrollable}
+
+[Plot sleep time of animals and rem sleep time in `msleep` data.]{style="font-size:20px"}
+
+:::{.panel-tabset}
+
+### Data
+
+```{r}
+#| echo: false
+
+msleep|>
+  relocate(sleep_total,sleep_rem,everything())|>
+  knitr::kable()|>
+  kableExtra::kable_styling()|>
+  kableExtra::scroll_box(width = "95%", height = "400px")
+  
+```
+
+
+
+### Use case - `geom_point()`
+
+```{r}
+#| code-line-numbers: "3-4|6"
+#| echo: true
+#| fig-align: center
+#| output-location: column-fragment
+#| fig-width: 8
+#| fig-height: 6
+
+ggplot(
+  data = msleep,
+  aes(x = sleep_total,
+      y = sleep_rem)
+)+
+  geom_point()+
+  theme_bw()
+
+```
+
+### Use case - `geom_smooth()`
+
+```{r}
+#| code-line-numbers: "3-4|6"
+#| echo: true
+#| fig-align: center
+#| output-location: column-fragment
+#| fig-width: 8
+#| fig-height: 6
+
+ggplot(
+  data = msleep,
+  aes(x = sleep_total,
+      y = sleep_rem)
+)+
+  geom_smooth()+
+  theme_bw()
+
+```
+
+:::
+
+## Situation - 1 Continious, 1 Discrete {.scrollable}
+
+[Plot sleep time of animals and conservation status in `msleep` data.]{style="font-size:20px"}
+
+:::{.panel-tabset}
+
+### Data
+
+```{r}
+#| echo: false
+
+msleep|>
+  relocate(sleep_total,conservation,everything())|>
+  knitr::kable()|>
+  kableExtra::kable_styling()|>
+  kableExtra::scroll_box(width = "95%", height = "400px")
+  
+```
+
+
+
+### Use case - `geom_col()`
+
+```{r}
+#| code-line-numbers: "1-5|7-8|10"
+#| echo: true
+#| fig-align: center
+#| output-location: column-fragment
+#| fig-width: 8
+#| fig-height: 6
+
+
+msleep|>
+  group_by(conservation)|>
+  summarise(
+    avg_sleep_time = mean(sleep_total,na.rm = T)
+  )|>
+  ggplot(
+  aes(x = conservation,
+      y = avg_sleep_time)
+  )+
+  geom_col()+
+  theme_bw()
+
+```
+
+### Use case - `geom_boxplot()`
+
+```{r}
+#| code-line-numbers: "3-4|6"
+#| echo: true
+#| fig-align: center
+#| output-location: column-fragment
+#| fig-width: 8
+#| fig-height: 6
+
+ggplot(
+  data = msleep,
+  aes(x = conservation,
+      y = sleep_total)
+)+
+  geom_boxplot()+
+  theme_bw()
+
+```
+
+:::
