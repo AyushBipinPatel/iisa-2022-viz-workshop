@@ -124,7 +124,7 @@ ggiraph::girafe(ggobj = p1,width_svg = 8,height_svg = 4)
 <br>
 
 
-```{r eval=FALSE,echo=TRUE}
+```{r eval=TRUE,echo=TRUE,results='hide'}
 library(tidyverse)
 library(scales)
 library(gapminder)
@@ -153,3 +153,199 @@ ggplot2::msleep|>
 ```
 
 :::
+
+## Components of a ggplot - canvas {auto-animate=true}
+
+```{r}
+#| echo: true
+#| output-location: column
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "2"
+
+# Data to use for creating plots
+ggplot(data = msleep) 
+
+```
+
+## Components of a ggplot - link vars to aesthetics {auto-animate=true}
+
+```{r}
+#| echo: true
+#| output-location: column
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "4,5,6"
+
+# Data to use for creating plots
+ggplot(data = msleep, 
+    # link variables in data to axes
+       aes(x = bodywt, 
+           y = sleep_total) 
+       ) 
+
+```
+
+## Components of a ggplot - Choose geometry {auto-animate=true}
+
+```{r}
+#| echo: true
+#| output-location: column
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "6,8"
+
+# Data to use for creating plots
+ggplot(data = msleep, 
+    # link variables in data to axes
+       aes(x = bodywt, 
+           y = sleep_total) 
+       )+ # plus sign'+' adds a layer
+    # A geometry or type of chart to plot
+  geom_point() 
+
+
+```
+
+## Components of a ggplot - the details {auto-animate=true}
+
+```{r}
+#| echo: true
+#| output-location: column
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "9-18"
+
+# Data to use for creating plots
+ggplot(data = msleep, 
+    # link variables in data to axes
+       aes(x = bodywt, 
+           y = sleep_total) 
+       )+ # plus sign'+' adds a layer
+    # A geometry or type of chart to plot
+  geom_point() + # A '+' sign for every layer
+  # add or edit various labels with this function
+  labs( 
+    # title for plot 
+    title = "Are body weight and sleep time related?", 
+    # x axis title
+    x = "Body weight (Kg)", 
+    # y axis title,
+    y = "Total sleep time (hours)" 
+  )+
+  theme_minimal() # cosmetics
+
+
+```
+
+## Summary - commponents of a ggplot {auto-animate=true}
+
+Create a blank canvas by using `ggplot()`
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "1"
+
+ggplot(data = df) # df is any data frame 
+```
+
+## Summary - commponents of a ggplot {auto-animate=true}
+
+Link variables (columns) from df to plot aesthetics using `aes()`
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "2-5"
+
+ggplot(data = df, # df is any data frame 
+       aes(
+         x = var1, # var1 is name of a column in df
+         y = var2  # var1 is name of a column in df
+         )
+       ) 
+```
+
+## Summary - commponents of a ggplot {auto-animate=true}
+
+Choose a geometry using `geom_*()`
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "7"
+
+ggplot(data = df, # df is any data frame 
+       aes(
+         x = var1, # var1 is name of a column in df
+         y = var2  # var1 is name of a column in df
+         )
+       ) +
+  geom_point() # geom layer, there are many geoms to chhoose from
+```
+
+## Summary - commponents of a ggplot {auto-animate=true}
+
+Add label details and cosmetics
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "8-15"
+
+ggplot(data = df, # df is any data frame 
+       aes(
+         x = var1, # var1 is name of a column in df
+         y = var2  # var1 is name of a column in df
+         )
+       ) +
+  geom_point() +# geom layer, there are many geoms to choose from
+  labs(
+    title = "Plot title",
+    subtitle = "Plot Sub-title",
+    x = "x-axis title",
+    y = "y-axis title",
+    caption = "plot caption"
+  )+
+  theme_bw() # there are many themes to choose from, you can make your own as well
+```
+
+## A quick coding exercise {{< fa solid laptop-code >}}
+
+Write a code to create a plot with following details:
+
+  1. Use the `msleep` data. (execute `?msleep` to see details of the data set)
+  2. A plot between variables `vore` and `sleep_total`
+  3. Link `vore` to x-axis and `sleep_total` to y-axis
+  4. Use geometry boxplot (hint: `geom_boxplot`)
+  5. Add appropriate titles and labels to the plot
+  6. Use the `theme_*()` options, choose any
+
+## Solution {{< fa solid check >}}
+
+```{r}
+#| echo: true
+#| output-location: slide
+#| fig-align: center
+#| fig-width: 12
+#| fig-height: 6
+
+ggplot(data = msleep,
+       aes(
+         x = vore,
+         y = sleep_total
+         )
+       )+
+  geom_boxplot(alpha = 0.5)+
+  labs(
+    title = "Sleep patters of animals by vore",
+    subtitle = "Broadly speaking, animals that eat insects sleep the most",
+    x = "Type of food",
+    y = "Total hours of sleep in a day",
+    caption = "data: V. M. Savage and G. B. West. A quantitative, theoretical framework for understanding mammalian sleep "
+  )+
+  theme_light()
+
+```
+
