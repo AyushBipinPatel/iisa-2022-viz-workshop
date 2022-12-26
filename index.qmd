@@ -86,6 +86,8 @@ If you have not already done so.
 install.packages(c("tidyverse", "ggiraph", "gapminder", "benchmarkme"))
 ```
 
+# [Click here](lecture_slides.html) to navigagte to lecture slides.
+
 # Refrences
 
   1. [R for Data Science](https://r4ds.had.co.nz/)
