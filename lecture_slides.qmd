@@ -18,6 +18,11 @@ format:
 
 __Ensure that you have the system requirements mentioned on [this page](https://r-iisa2022.rbind.io/schedule/) under the 'Prepare for the workshop' section.__
 
+<br>
+<br>
+
+Access lecture slide using [bit.ly/3vhOhSI](http://bit.ly/3vhOhSI)
+
 :::
 
 :::{.column width="30%"}
