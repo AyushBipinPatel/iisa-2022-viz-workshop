@@ -1,6 +1,7 @@
 ---
 title: "Data Visualization with R"
 author: "Ayush Patel"
+subtitle: "At IISA Annual Conference, 2022"
 format: 
   revealjs:
     standalone: true
@@ -311,7 +312,7 @@ ggplot(data = df, # df is any data frame
   theme_bw() # there are many themes to choose from, you can make your own as well
 ```
 
-## A quick coding exercise {{< fa solid laptop-code >}}
+## A quick coding exercise - 1 {{< fa solid laptop-code >}}
 
 Write a code to create a plot with following details:
 
@@ -322,7 +323,7 @@ Write a code to create a plot with following details:
   5. Add appropriate titles and labels to the plot
   6. Use the `theme_*()` options, choose any
 
-## Solution {{< fa solid check >}}
+## Solution - 1{{< fa solid check >}}
 
 ```{r}
 #| echo: true
@@ -600,3 +601,556 @@ ggplot(
 ```
 
 :::
+
+## Summary - Geometries
+
+```{r}
+#| echo: false
+
+tibble(
+  `Situation` = c("1 Discrete Variable",
+                  "1 Continious Varialbe",
+                  "2 Continious Variable",
+                  "1 Continiouos,1 Discrete"),
+  `Geom Options` = c("geom_bar()",
+                     "geom_density(), geom_histogram()",
+                     "geom_point(), geom_smooth()",
+                     "geom_col(), geom_boxplot()")
+)|>
+    gt::gt()
+
+```
+
+## A quick coding detour - 2 {{< fa solid laptop-code >}}
+
+Use the data `gapminder` and create a boxplot using variables `continent` and `lifeExp`
+
+## Solution - 2 {{< fa solid check >}}
+
+```{r}
+#| echo: true
+#| output-location: slide
+#| fig-align: center
+#| fig-width: 12
+#| fig-height: 6
+
+ggplot(data = gapminder,
+       aes(x = continent,
+           y = lifeExp
+           )
+       )+
+  geom_boxplot()+
+  labs(
+    title = "Distribution of life expectancy across continents",
+    x = "Continent",
+    y = "Life expectancy in years"
+  )+
+  theme_bw()
+
+```
+
+
+## A quick coding detour - 3 {{< fa solid laptop-code >}}
+
+Use the data `gapminder` and create a point/scatter chart using variables `gdpPercap` and `lifeExp`
+
+## Solution - 3 {{< fa solid check >}}
+
+```{r}
+#| echo: true
+#| output-location: slide
+#| fig-align: center
+#| fig-width: 12
+#| fig-height: 6
+
+ggplot(data = gapminder,
+       aes(x = gdpPercap,
+           y = lifeExp
+           )
+       )+
+  geom_point()+
+  labs(
+    title = "GDP and LIfe expectancy",
+    x = "GDP per capita in USD",
+    y = "Life expectancy in years"
+  )+
+  theme_bw()
+
+```
+
+## Aesthetics for geometries
+
+
+ `size` | `colour` | `fill` | `alpha`
+ 
+ . . .
+  
+_Why ?_
+
+  - aesthetics can be linked with variables in data - using `aes()`
+  - values can be assigned to aesthetics directly
+  - makes the plots look more appealing
+  - helps add more nuance to the plots
+
+
+## Aesthetics use case - size {auto-animate=true}
+
+original chart
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-align: center
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "6"
+
+ggplot(data = gapminder,
+       aes(x = gdpPercap,
+           y = lifeExp
+           )
+       )+
+  geom_point()+
+  labs(
+    title = "GDP and LIfe expectancy",
+    x = "GDP per capita in USD",
+    y = "Life expectancy in years"
+  )+
+  theme_bw()
+
+```
+
+## Aesthetics use case - size {auto-animate=true}
+
+Supply values directly to `size`
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-align: center
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "6"
+
+ggplot(data = gapminder,
+       aes(x = gdpPercap,
+           y = lifeExp
+           )
+       )+
+  geom_point(size = 3)+
+  labs(
+    title = "GDP and LIfe expectancy",
+    x = "GDP per capita in USD",
+    y = "Life expectancy in years"
+  )+
+  theme_bw()
+
+```
+
+## Aesthetics use case - size {auto-animate=true}
+
+link `size` to a variable in data
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-align: center
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "6"
+
+ggplot(data = gapminder,
+       aes(x = gdpPercap,
+           y = lifeExp
+           )
+       )+
+  geom_point(aes(size = pop))+
+  labs(
+    title = "GDP and LIfe expectancy",
+    x = "GDP per capita in USD",
+    y = "Life expectancy in years"
+  )+
+  theme_bw()
+
+```
+
+## Aesthetics use case - alpha {auto-animate=true}
+
+original chart
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-align: center
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "6"
+
+ggplot(data = gapminder,
+       aes(x = gdpPercap,
+           y = lifeExp
+           )
+       )+
+  geom_point()+
+  labs(
+    title = "GDP and LIfe expectancy",
+    x = "GDP per capita in USD",
+    y = "Life expectancy in years"
+  )+
+  theme_bw()
+
+```
+
+## Aesthetics use case - alpha {auto-animate=true}
+
+Supply values directly to `alpha`
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-align: center
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "6"
+
+ggplot(data = gapminder,
+       aes(x = gdpPercap,
+           y = lifeExp
+           )
+       )+
+  geom_point(alpha = 0.5)+
+  labs(
+    title = "GDP and LIfe expectancy",
+    x = "GDP per capita in USD",
+    y = "Life expectancy in years"
+  )+
+  theme_bw()
+
+```
+
+## Aesthetics use case - colour {auto-animate=true}
+
+original chart
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-align: center
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "6"
+
+ggplot(data = gapminder,
+       aes(x = gdpPercap,
+           y = lifeExp
+           )
+       )+
+  geom_point()+
+  labs(
+    title = "GDP and LIfe expectancy",
+    x = "GDP per capita in USD",
+    y = "Life expectancy in years"
+  )+
+  theme_bw()
+
+```
+
+## Aesthetics use case - colour {auto-animate=true}
+
+Supply values directly to `colour`
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-align: center
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "6"
+
+ggplot(data = gapminder,
+       aes(x = gdpPercap,
+           y = lifeExp
+           )
+       )+
+  geom_point(colour = "red")+
+  labs(
+    title = "GDP and LIfe expectancy",
+    x = "GDP per capita in USD",
+    y = "Life expectancy in years"
+  )+
+  theme_bw()
+
+```
+
+## Aesthetics use case - colour {auto-animate=true}
+
+link `colour` to a variable in data
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-align: center
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "6"
+
+ggplot(data = gapminder,
+       aes(x = gdpPercap,
+           y = lifeExp
+           )
+       )+
+  geom_point(aes(colour = continent))+
+  labs(
+    title = "GDP and LIfe expectancy",
+    x = "GDP per capita in USD",
+    y = "Life expectancy in years"
+  )+
+  theme_bw()
+
+```
+
+## Aesthetics - `fill` vs `colour`
+
+::::{.columns}
+
+:::{.column width="50%"}
+```{r}
+#| echo: true
+#| code-line-numbers: "6"
+
+ggplot(
+  data = msleep,
+  aes(x = conservation,
+      y = sleep_total)
+)+
+  geom_boxplot(fill = "red")+
+  theme_bw()
+```
+
+:::
+
+:::{.column width="50%"}
+```{r}
+#| echo: true
+#| code-line-numbers: "6"
+
+ggplot(
+  data = msleep,
+  aes(x = conservation,
+      y = sleep_total)
+)+
+  geom_boxplot(colour = "red")+
+  theme_bw()
+```
+
+:::
+
+::::
+
+## Aesthetics - `fill` vs `colour`
+
+::::{.columns}
+
+:::{.column width="50%"}
+```{r}
+#| echo: true
+#| code-line-numbers: "6"
+
+ggplot(
+  data = msleep,
+  aes(x = conservation,
+      y = sleep_total)
+)+
+  geom_boxplot(aes(fill = vore))+
+  theme_bw()
+```
+
+:::
+
+:::{.column width="50%"}
+```{r}
+#| echo: true
+#| code-line-numbers: "6"
+
+ggplot(
+  data = msleep,
+  aes(x = conservation,
+      y = sleep_total)
+)+
+  geom_boxplot(aes(colour = vore))+
+  theme_bw()
+```
+
+:::
+
+::::
+
+## You can have it all
+
+```{r}
+#| echo: true
+#| output-location: slide
+#| fig-align: center
+#| fig-width: 14
+#| fig-height: 6
+#| code-line-numbers: "6-9"
+
+
+ggplot(
+  data = msleep,
+  aes(x = conservation,
+      y = sleep_total)
+)+
+  geom_jitter(aes(colour = vore, 
+                  size = bodywt),
+              alpha = 0.7)+
+  geom_boxplot(aes(colour = vore))+
+  theme_bw()
+
+
+```
+
+## Stacked bar charts {auto-animate=true}
+
+```{r}
+#| echo: true
+#| output-location: column
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "2"
+
+ggplot(msleep)+
+  geom_bar(aes(conservation))+
+  theme_bw()
+
+```
+
+## Stacked bar charts {auto-animate=true}
+
+```{r}
+#| echo: true
+#| output-location: column
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "2"
+
+ggplot(msleep)+
+  geom_bar(aes(conservation, fill = vore))+
+  theme_bw()
+
+```
+
+## Stacked bar charts {auto-animate=true}
+
+```{r}
+#| echo: true
+#| output-location: column
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "2,3"
+
+ggplot(msleep)+
+  geom_bar(aes(conservation, fill = vore),
+           position = "dodge")+
+  theme_bw()
+
+```
+
+## Stacked bar charts {auto-animate=true}
+
+```{r}
+#| echo: true
+#| output-location: column
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "2,3"
+
+ggplot(msleep)+
+  geom_bar(aes(conservation, fill = vore),
+           position = "fill")+
+  theme_bw()
+
+```
+
+## {ggiraph} demo {style="text-align:center;padding:250px 0"}
+
+## Interactive geometries {auto-animate=true}
+
+```{r}
+#| echo: true
+#| output-location: column
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "5"
+
+
+ggplot(
+  data = gapminder,
+  aes(x = gdpPercap,
+      y = lifeExp)
+)+
+  geom_point(
+    alpha=0.5
+  )+
+  theme_bw()
+```
+
+## Interactive geometries {auto-animate=true}
+
+```{r}
+#| echo: true
+#| output-location: column
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "6-8,14"
+
+
+ggplot(
+  data = gapminder,
+  aes(x = gdpPercap,
+      y = lifeExp)
+)+
+  geom_point_interactive(
+    aes(
+      tooltip = country
+    ),
+    alpha=0.5
+  )+
+  theme_bw()-> p
+
+girafe(ggobj = p)
+```
+
+## Interactive geometries - modifying tooltip {auto-animate=true}
+
+```{r}
+#| echo: true
+#| output-location: column
+#| fig-width: 8
+#| fig-height: 6
+#| code-line-numbers: "8-14"
+
+
+ggplot(
+  data = gapminder,
+  aes(x = gdpPercap,
+      y = lifeExp)
+)+
+  geom_point_interactive(
+    aes(
+      tooltip = paste0(
+        country,"\n",
+        "Year: ",year,"\n",
+        "Population: ",pop,"\n",
+        "GDPP: ", gdpPercap,"\n",
+        "Life Expec.: ", lifeExp,"\n"
+      )
+    ),
+    alpha=0.5
+  )+
+  theme_bw()-> p
+
+girafe(ggobj = p)
+```
+
+## Thank you. {style="text-align:center;padding:250px 0"}
