@@ -754,7 +754,7 @@ ggplot(data = gapminder,
 
 ## Aesthetics use case - size {auto-animate=true}
 
-link `size` to a continuous variable in data
+link `size` to a variable in data
 
 ```{r}
 #| echo: true
@@ -1014,6 +1014,57 @@ ggplot(
 
 
 ```
+
+
+## A quick coding detour - 4 {{< fa solid laptop-code >}}
+
+[Write a code that will generate the following chart. Use `gapminder` data.]{style="font-size:30px"}
+
+```{r}
+#| echo: false
+#| code-line-numbers: "2,3,4,5"
+#| fig-align: center
+#| fig-width: 14
+#| fig-height: 6
+
+ggplot(gapminder,
+       aes(x = lifeExp))+
+  geom_density(aes(fill = continent),
+               alpha = 0.5)+
+  scale_fill_manual(values = continent_colors)+
+  labs(
+    title = "Distribution of Life Expectancy",
+    y = "Density",
+    x = "Life Expectancy in years"
+  )+
+  theme_bw()
+
+```
+
+
+## Solution - 4 {{< fa solid check >}}
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "2,3,4,5"
+
+
+ggplot(gapminder,
+       aes(x = lifeExp))+
+  geom_density(aes(fill = continent),
+               alpha = 0.5)+
+  scale_fill_manual(values = continent_colors)+
+  labs(
+    title = "Distribution of Life Expectancy",
+    y = "Density",
+    x = "Life Expectancy in years"
+  )+
+  theme_bw()
+
+```
+
+
 
 ## Stacked bar charts {auto-animate=true}
 
