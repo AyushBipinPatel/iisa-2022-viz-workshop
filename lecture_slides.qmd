@@ -415,7 +415,7 @@ ggplot(
 
 :::
 
-## Situation - One Continious variable {.scrollable}
+## Situation - One Continuous variable {.scrollable}
 
 [Plot sleep time of animals in `msleep` data.]{style="font-size:20px"}
 
@@ -476,7 +476,7 @@ ggplot(
 
 :::
 
-## Situation - Two Continious variable {.scrollable}
+## Situation - Two Continuous variable {.scrollable}
 
 [Plot sleep time of animals and rem sleep time in `msleep` data.]{style="font-size:20px"}
 
@@ -539,7 +539,7 @@ ggplot(
 
 :::
 
-## Situation - 1 Continious, 1 Discrete {.scrollable}
+## Situation - 1 Continuous, 1 Discrete {.scrollable}
 
 [Plot sleep time of animals and conservation status in `msleep` data.]{style="font-size:20px"}
 
@@ -754,7 +754,7 @@ ggplot(data = gapminder,
 
 ## Aesthetics use case - size {auto-animate=true}
 
-link `size` to a variable in data
+link `size` to a continuous variable in data
 
 ```{r}
 #| echo: true
